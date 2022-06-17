@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: order
-        image: order:latest
+        image: docker pull order123.azurecr.io/myapirepo:latest
         ports:
         - containerPort: 7070
       imagePullSecrets:
