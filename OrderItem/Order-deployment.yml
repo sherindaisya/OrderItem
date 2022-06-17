@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: Order-deployment
+  labels:
+    app: order
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order
+      
+  template:
+    metadata:
+      labels:
+        app: order
+    spec:
+      containers:
+      - name: order
+        image: order:latest
+        ports:
+        - containerPort: 7070
+      imagePullSecrets:
+      - name: mycredentials
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ordersvc
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 70
+  selector:
+    app: order
